@@ -53,7 +53,7 @@ It simulates a simple e-commerce product service running in a CI/CD-enabled AWS 
 ##  Repository Structure
 devops-ecommerce/
 ├── .github/workflows/
-│ └── ci-cd.yml # GitHub Actions CI/CD pipeline
+│ └── ci-cd.yml 
 ├── product-service/
 │ ├── src/ # Java source code
 │ ├── Dockerfile # Docker build file
@@ -106,8 +106,8 @@ Product Service is running successfully!
 
 ## Author
 **Vignesh V**  
-📍 Chennai, India  
-📧 vignesh.vellaidurai@gmail.com  
+Chennai, India  
+vignesh.vellaidurai@gmail.com  
 [GitHub: inxanae](https://github.com/inxanae)
 
 ---
