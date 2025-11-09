@@ -1,6 +1,3 @@
-# ---------------------------
-# VPC Configuration
-# ---------------------------
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_support   = true
@@ -11,9 +8,6 @@ resource "aws_vpc" "main" {
   }
 }
 
-# ---------------------------
-# Public Subnets
-# ---------------------------
 resource "aws_subnet" "subnet_a" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.1.0/24"
@@ -36,9 +30,6 @@ resource "aws_subnet" "subnet_b" {
   }
 }
 
-# ---------------------------
-# Internet Gateway
-# ---------------------------
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
@@ -47,9 +38,6 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# ---------------------------
-# Public Route Table
-# ---------------------------
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
@@ -63,9 +51,6 @@ resource "aws_route_table" "public" {
   }
 }
 
-# ---------------------------
-# Route Table Associations
-# ---------------------------
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.subnet_a.id
   route_table_id = aws_route_table.public.id
@@ -76,15 +61,11 @@ resource "aws_route_table_association" "b" {
   route_table_id = aws_route_table.public.id
 }
 
-# ---------------------------
-# ECS Security Group
-# ---------------------------
 resource "aws_security_group" "ecs_sg" {
   name        = "ecs-sg"
   description = "Allow HTTP traffic to ECS tasks"
   vpc_id      = aws_vpc.main.id
 
-  # Allow inbound traffic to application port
   ingress {
     from_port   = 8080
     to_port     = 8080
@@ -92,7 +73,6 @@ resource "aws_security_group" "ecs_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow all outbound traffic
   egress {
     from_port   = 0
     to_port     = 0
