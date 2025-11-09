@@ -52,21 +52,37 @@ It simulates a simple e-commerce product service running in a CI/CD-enabled AWS 
 
 ##  Repository Structure
 devops-ecommerce/
+
 ├── .github/workflows/
-│ └── ci-cd.yml 
+
+│ └── ci-cd.yml
+
 ├── product-service/
+
 │ ├── src/ # Java source code
+
 │ ├── Dockerfile # Docker build file
+
 │ └── pom.xml # Maven configuration
+
 ├── terraform/
+
 │ ├── main.tf # ECS, IAM, and Service definitions
+
 │ ├── vpc.tf # VPC and subnet configuration
+
 │ ├── alb.tf # Application Load Balancer setup
+
 │ ├── backend.tf # S3 backend configuration
+
 │ ├── provider.tf # AWS provider details
+
 │ └── modules/
+
 │ ├── ecr/ # ECR module
+
 │ └── ecs-cluster/ # ECS Cluster module
+
 └── README.md
 
 ---
