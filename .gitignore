@@ -1,25 +1,20 @@
-# Ignore Terraform local files
 terraform/.terraform/
 terraform/*.tfstate
 terraform/*.tfstate.*
 terraform/crash.log
 terraform/.terraform.lock.hcl
 
-# Ignore AWS credentials
 *.pem
 *.key
 *.tfvars
 
-# Ignore build and dependency folders
 product-service/target/
 **/node_modules/
 **/.DS_Store
 
-# Ignore IDE/editor settings
 .vscode/
 .idea/
 *.iml
 
-# Ignore OS-generated files
 Thumbs.db
 .DS_Store
