@@ -1,7 +1,3 @@
-# -----------------------------
-# Application Load Balancer (ALB)
-# -----------------------------
-
 resource "aws_lb" "app_lb" {
   name               = "devops-ecommerce-alb"
   internal           = false
