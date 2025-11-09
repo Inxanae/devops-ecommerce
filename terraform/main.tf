@@ -1,13 +1,7 @@
-###########################################
-# Provider Configuration
-###########################################
 provider "aws" {
   region = "us-east-1"
 }
 
-###########################################
-# ECS Cluster
-###########################################
 resource "aws_ecs_cluster" "main" {
   name = "devops-ecommerce-cluster"
 
@@ -22,9 +16,6 @@ resource "aws_ecs_cluster" "main" {
   }
 }
 
-###########################################
-# IAM Role for ECS Task Execution
-###########################################
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "ecsTaskExecutionRole"
 
@@ -48,9 +39,6 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-###########################################
-# ECS Task Definition
-###########################################
 resource "aws_ecs_task_definition" "app_task" {
   family                   = "app-task"
   network_mode             = "awsvpc"
@@ -59,13 +47,9 @@ resource "aws_ecs_task_definition" "app_task" {
   memory                   = "512"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
 
-  # Uses your JSON file
   container_definitions = file("${path.module}/ecs-task-def.json")
 }
 
-###########################################
-# ECS Service (connects to VPC & ALB)
-###########################################
 resource "aws_ecs_service" "app_service" {
   name            = "app-service"
   cluster         = aws_ecs_cluster.main.id
@@ -79,12 +63,6 @@ resource "aws_ecs_service" "app_service" {
     security_groups  = [aws_security_group.ecs_sg.id]
   }
 
-  # Load balancer connection (optional, will be used when ALB is added)
-  # load_balancer {
-  #   target_group_arn = aws_lb_target_group.app_tg.arn
-  #   container_name   = "product-service"
-  #   container_port   = 8080
-  # }
 
   depends_on = [
     aws_ecs_task_definition.app_task,
