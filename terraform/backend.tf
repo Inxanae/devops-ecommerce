@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket         = "vignesh-terraform-state-12345" # your bucket name
+    bucket         = "vignesh-terraform-state-12345" 
     key            = "devops-ecommerce/terraform.tfstate"
-    region         = "us-east-1" # your region
+    region         = "us-east-1" 
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
